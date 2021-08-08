@@ -16,11 +16,11 @@ const MainLayout = ({ children }: Child): ReactElement => {
 
 	return (
 		<>
-			<Header />
+			<Header/>
 			<Box className={classes.root} component='main'>
 				{children}
 			</Box>
-			<Footer />
+			<Footer/>
 		</>
 	);
 };

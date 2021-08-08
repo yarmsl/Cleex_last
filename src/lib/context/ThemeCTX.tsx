@@ -1,4 +1,4 @@
-import { Theme, ThemeProvider } from '@material-ui/core';
+import { Theme, ThemeProvider} from '@material-ui/core';
 import React, { ReactElement, useContext, useReducer, createContext } from 'react';
 import { LDTheme, Child, ThemeCtx } from '../../types/types';
 import lightTheme from '../../UI/lightTheme';

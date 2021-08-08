@@ -1,10 +1,13 @@
 import React, { useState, ReactElement } from 'react';
 import { AppBar, Avatar, Button, ButtonGroup, Container, makeStyles } from '@material-ui/core';
 import LogoCleex from './LogoCleex';
+import { useAuth } from '../../lib/context/AuthCTX';
 
 const useStyles = makeStyles((themeCleex) => ({
 	root: {
-		height: '88px',
+		height: 'auto',
+		backdropFilter: 'blur(6px)',
+		backgroundColor: 'rgba(255, 255, 255, 0.8)',
 		boxShadow: themeCleex.shadows[11],
 	},
 	header: {
@@ -23,13 +26,13 @@ const useStyles = makeStyles((themeCleex) => ({
 }));
 
 const Header = (): ReactElement => {
-
+	console.log(useAuth());
 	const [isAuth, setIsAuth] = useState(false);
 
 	const classes = useStyles();
 
 	return (
-		<AppBar position='fixed' color='secondary' className={classes.root}>
+		<AppBar position='fixed' className={classes.root}>
 			<Container className={classes.header} >
 				<LogoCleex />
 				{!isAuth && <ButtonGroup variant='contained' color='primary'>

@@ -6,7 +6,7 @@ const HelmetLayout = ({children, title}: MetaLT): ReactElement => {
 	return (
 		<>
 			<Helmet>
-				<title>React TS {title}</title>
+				<title>CLEEX {title}</title>
 			</Helmet>
 			{children}
 		</>

@@ -1,12 +1,13 @@
 import React, { ReactElement } from 'react';
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import Logo from '../../UI/icons/Logo';
+import { Link } from 'react-router-dom';
+
 
 const useStyles = makeStyles(() => ({
 	logoButton: {
-		height: '100%',
+		height: 'auto',
 		width: '200px',
-		padding: '2px 0',
 		boxSizing: 'border-box',
 		borderRadius: '0',
 		'&>*': {
@@ -19,13 +20,14 @@ const useStyles = makeStyles(() => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		padding: '20px 0'
+		padding: '5px 0',
 	},
 	logo: {
-		height: 'calc(100% - 12px)'
+		width: '80%',
+		
 	},
 	logoSub: {
-		height: '14px'
+		fontSize: '9px'
 	}
 }));
 
@@ -34,7 +36,7 @@ const LogoCleex = (): ReactElement => {
 	const classes = useStyles();
 
 	return (
-		<Button className={classes.logoButton}>
+		<Button component={Link} to={'/'} className={classes.logoButton}>
 			<Box className={classes.logoBox}>
 				<Logo className={classes.logo} />
 				<Typography className={classes.logoSub} variant='subtitle1' component='h1'>Современное решение для бизнеса</Typography>

@@ -13,15 +13,15 @@ const Routes = (): ReactElement => {
 	return (
 		<ThemesProvider>
 			<CssBaseline />
-			<MainLayout>
-				<Router>
+			<Router>
+				<MainLayout>
 					<Switch>
 						<Route exact path='/' component={Home} />
 						<Route exact path='/page' component={Page1} />
 						<Route component={NotFound} />
 					</Switch>
-				</Router>
-			</MainLayout>
+				</MainLayout>
+			</Router>
 		</ThemesProvider>
 	);
 };

@@ -18,16 +18,20 @@ const useStyles = makeStyles(() => ({
 	imageBox: {
 		width: '45%',
 		height: '100%',
+		display: 'flex'
 	},
 	img1: {
 		width: '100%',
 		objectFit: 'contain',
-		alignSelf: 'flex-start',
+		alignSelf: 'flex-end',
 	},
 	img2: {
 		width: '100%',
 		objectFit: 'contain',
-		alignSelf: 'flex-end',
+		alignSelf: 'flex-start',
+	},
+	title: {
+		marginBottom: '16px'
 	},
 	info: {
 		width: '50%',
@@ -50,7 +54,7 @@ const OnlineMenuSection = (): ReactElement => {
 	return (
 		<Container className={classes.root}>
 			<Box className={classes.info}>
-				<Typography variant='h4' color='textSecondary'>{content.title}</Typography>
+				<Typography className={classes.title} variant='h4' color='textSecondary'>{content.title}</Typography>
 				<Typography variant='body1'>{content.text}</Typography>
 			</Box>
 			<Box className={classes.images}>

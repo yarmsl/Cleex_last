@@ -1,6 +1,7 @@
+import React, { ReactElement} from 'react';
 import { Box, Container, makeStyles, Typography } from '@material-ui/core';
-import React, { ReactElement } from 'react';
 import { ApplePayIcon, GPayIcon } from '../../UI/icons/BankIcons';
+
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -32,6 +33,9 @@ const useStyles = makeStyles(() => ({
 		objectFit: 'contain',
 		alignSelf: 'flex-end',
 	},
+	title: {
+		marginBottom: '16px'
+	},
 	info: {
 		width: '50%',
 		height: '100%',
@@ -52,12 +56,12 @@ const useStyles = makeStyles(() => ({
 
 const content = {
 	title: 'Бесконтактные чаевые для работников',
-	text1: 'При оплате заказа гостю предлагается поблагодарить сотрудника за сервис.Вознаграждение переводится с карты гостя на карту официанта. Транзакция проходит бесконтактно с помощью Apple Pay, Google Pay.',
+	text1: 'При оплате заказа гостю предлагается поблагодарить сотрудника за сервис. Вознаграждение переводится с карты гостя на карту официанта. Транзакция проходит бесконтактно с помощью Apple Pay, Google Pay.',
 	text2: 'Комиссия составляет 5% и по умолчанию взимается с суммы перевода. Гость может взять комиссию на себя, нажав кнопку «Оплатить комиссию». В этом случае комиссия будет начислена сверх платежа.'
 };
 
 const RemoteTipsSection = (): ReactElement => {
-	
+
 	const classes = useStyles();
 
 	return (
@@ -71,12 +75,12 @@ const RemoteTipsSection = (): ReactElement => {
 				</Box>
 			</Box>
 			<Box className={classes.info}>
-				<Typography variant='h4' align='right' color='textSecondary'>{content.title}</Typography>
+				<Typography className={classes.title} variant='h4' align='right' color='textSecondary'>{content.title}</Typography>
 				<Typography variant='body1' align='right'>{content.text1}</Typography>
 				<Typography variant='body1' align='right'>{content.text2}</Typography>
 				<Box className={classes.pay}>
 					<GPayIcon />
-					<ApplePayIcon/>
+					<ApplePayIcon />
 				</Box>
 			</Box>
 		</Container>

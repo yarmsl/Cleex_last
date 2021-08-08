@@ -8,15 +8,24 @@ const useStyles = makeStyles(() => ({
 		marginTop: '24px',
 		marginBottom: '24px'
 	},
-	imageBox: {
+	imageWrapper: {
 		width: '50%',
 		height: '100%',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	imageBox: {
+		width: '50%',
 		display: 'flex'
 	},
 	img: {
 		width: '100%',
 		objectFit: 'contain',
 		alignSelf: 'center',
+	},
+	title: {
+		marginBottom: '16px'
 	},
 	info: {
 		width: '50%',
@@ -39,11 +48,13 @@ const CallWaiterSection = (): ReactElement => {
 
 	return (
 		<Container className={classes.root}>
-			<Box className={classes.imageBox}>
-				<img className={classes.img} src={'/imgs/call_waiter.png'} />
+			<Box className={classes.imageWrapper}>
+				<Box className={classes.imageBox}>
+					<img className={classes.img} src={'/imgs/call_waiter.png'} />
+				</Box>
 			</Box>
 			<Box className={classes.info}>
-				<Typography variant='h4' align='right' color='textSecondary'>{content.title}</Typography>
+				<Typography className={classes.title} variant='h4' align='right' color='textSecondary'>{content.title}</Typography>
 				<Typography variant='body1' align='right'>{content.text1}</Typography>
 				<Typography variant='body1' align='right'>{content.text2}</Typography>
 			</Box>
