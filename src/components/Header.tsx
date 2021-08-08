@@ -1,7 +1,7 @@
 import React, { useState, ReactElement } from 'react';
 import { AppBar, Avatar, Button, ButtonGroup, Container, makeStyles } from '@material-ui/core';
 import LogoCleex from './LogoCleex';
-import { useAuth } from '../../lib/context/AuthCTX';
+import { useAuth } from '../lib/context/AuthCTX';
 
 const useStyles = makeStyles((themeCleex) => ({
 	root: {

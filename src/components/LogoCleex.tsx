@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
-import Logo from '../../UI/icons/Logo';
+import Logo from '../UI/icons/Logo';
 import { Link } from 'react-router-dom';
 
 
