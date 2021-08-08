@@ -5,13 +5,26 @@ export interface Child  {
 	children?: React.ReactNode;
 }
 
+export type Themes = 'light' | 'dark';
+
 export interface LDTheme {
-	type: 'light' | 'dark';
+	type: Themes;
 }
 
 export interface ThemeCtx {
 	theme?: Theme;
-	switchTheme: (str: 'light' | 'dark') => void;
+	switchTheme: (str: Themes) => void;
+}
+
+export type Companies = 'cleex' | 'topka';
+
+export interface CompanyAction {
+	type: Companies;
+}
+
+export interface CompanyCtx {
+	company: Companies;
+	switchCompany: (str: Companies) => void;
 }
 
 export interface MetaLT extends Child {
@@ -22,4 +35,8 @@ export interface svgIcon {
 	color?: string;
 	viewBox?: string;
 	className?: string;
+}
+
+export interface TabsProps {
+	scrollTo: (page: number) => void;
 }

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useRef } from 'react';
 import AdaptPlatformSection from '../components/Home/AdaptPlatformSection';
 import CallWaiterSection from '../components/Home/CallWaiterSection';
 import NewLevelOfService from '../components/Home/NewLevelOfService';
@@ -6,17 +6,22 @@ import OnlineMenuSection from '../components/Home/OnlineMenuSection';
 import RemoteTipsSection from '../components/Home/RemoteTipsSection';
 import Tabs from '../components/Home/Tabs';
 import HelmetLayout from '../layouts/HelmetLayout';
-import { Parallax, ParallaxLayer } from '@react-spring/parallax';
+import { IParallax, Parallax, ParallaxLayer, } from '@react-spring/parallax';
 import QrNfcInteraction from '../components/Home/QrNfcInteraction';
 
-export default function Home(): ReactElement {
+function Home(): ReactElement {
+	const paral = useRef({} as IParallax);
+
+	const scrollToPage = (page: number): void => paral.current.scrollTo(page);
+
 	return (
 		<HelmetLayout title=''>
-			<Parallax pages={6}>
 
-				<ParallaxLayer  offset={0} speed={1} style={{ backgroundColor: '#F5F2ED', }} />
-				<ParallaxLayer  offset={0} speed={0.5}>
-					<Tabs />
+			<Parallax pages={6} ref={paral}>
+
+				<ParallaxLayer offset={0} speed={1.5} style={{ backgroundColor: '#F5F2ED', }} />
+				<ParallaxLayer offset={0} speed={0.5}>
+					<Tabs scrollTo = {scrollToPage} />
 					<NewLevelOfService />
 				</ParallaxLayer>
 
@@ -39,10 +44,13 @@ export default function Home(): ReactElement {
 				</ParallaxLayer>
 
 				<ParallaxLayer offset={5} speed={0.01}>
-					<QrNfcInteraction/>
+					<QrNfcInteraction />
 				</ParallaxLayer>
 
-			</Parallax>			
+			</Parallax>
+
 		</HelmetLayout>
 	);
 }
+
+export default Home;

@@ -26,7 +26,8 @@ const useStyles = makeStyles(() => ({
 	},
 	imageBox: {
 		minWidth: '70%',
-		display: 'flex'
+		display: 'flex',
+		cursor: 'move',
 	},
 	img: {
 		width: '100%',

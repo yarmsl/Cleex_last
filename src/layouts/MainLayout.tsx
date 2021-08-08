@@ -6,7 +6,7 @@ import Footer from '../components/Home/Footer';
 
 const useStyles = makeStyles(() => ({
 	root: {
-		flexGrow: 1
+		flexGrow: 1,
 	},
 }));
 

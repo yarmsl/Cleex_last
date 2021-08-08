@@ -6,22 +6,25 @@ import MainLayout from './layouts/MainLayout';
 import { CssBaseline } from '@material-ui/core';
 import ThemesProvider from './lib/context/ThemeCTX';
 import { useAuth } from './lib/context/AuthCTX';
-import Page1 from './pages/Page1';
+import CompanyProvider from './lib/context/CompanyCTX';
+import Topka from './pages/Topka';
 
 const Routes = (): ReactElement => {
 	console.log(useAuth());
 	return (
 		<ThemesProvider>
-			<CssBaseline />
-			<Router>
-				<MainLayout>
-					<Switch>
-						<Route exact path='/' component={Home} />
-						<Route exact path='/page' component={Page1} />
-						<Route component={NotFound} />
-					</Switch>
-				</MainLayout>
-			</Router>
+			<CompanyProvider>
+				<CssBaseline />
+				<Router>
+					<MainLayout>
+						<Switch>
+							<Route exact path='/' component={Home} />
+							<Route exact path='/topka' component={Topka} />
+							<Route component={NotFound} />
+						</Switch>
+					</MainLayout>
+				</Router>
+			</CompanyProvider>
 		</ThemesProvider>
 	);
 };
