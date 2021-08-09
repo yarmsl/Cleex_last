@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
 		alignItems: 'center',
 		justifyContent: 'center',
 		position: 'relative',
-		background: 'no-repeat url(/imgs/nfc.png), no-repeat url(/imgs/qr.png)',
+		background: 'no-repeat url(./imgs/nfc.png), no-repeat url(./imgs/qr.png)',
 		backgroundPosition: 'top 25% left 20px, bottom 25% right 20px',
 		backgroundSize: '35%, 32%',
 	},
