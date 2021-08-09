@@ -10,7 +10,8 @@ import CompanyProvider from './lib/context/CompanyCTX';
 import Topka from './pages/Topka';
 
 const Routes = (): ReactElement => {
-	console.log(useAuth());
+	const [isAuth] = useAuth();
+	console.log(isAuth);
 	return (
 		<ThemesProvider>
 			<CompanyProvider>

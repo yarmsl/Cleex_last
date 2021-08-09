@@ -3,7 +3,6 @@ import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import Logo from '../UI/icons/Logo';
 import { Link } from 'react-router-dom';
 
-
 const useStyles = makeStyles(() => ({
 	logoButton: {
 		height: 'auto',
@@ -20,7 +19,7 @@ const useStyles = makeStyles(() => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		padding: '5px 0',
+		padding: '2px 0',
 	},
 	logo: {
 		width: '80%',
