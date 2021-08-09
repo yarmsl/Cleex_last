@@ -59,10 +59,10 @@ const OnlineMenuSection = (): ReactElement => {
 			</Box>
 			<Box className={classes.images}>
 				<Box className={classes.imageBox}>
-					<img className={classes.img1} src={'/imgs/online_menu_1.png'} />
+					<img className={classes.img1} src={'./imgs/online_menu_1.png'} />
 				</Box>
 				<Box className={classes.imageBox}>
-					<img className={classes.img2} src={'/imgs/online_menu_2.png'} />
+					<img className={classes.img2} src={'./imgs/online_menu_2.png'} />
 				</Box>
 			</Box>
 

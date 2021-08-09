@@ -48,10 +48,10 @@ const OnlineMenu = (): ReactElement => {
 		<>
 			<Box className={classes.imageWrapper}>
 				<Box className={classes.imageBox}>
-					<img className={classes.img1} src={'/imgs/online_menu_1.png'} />
+					<img className={classes.img1} src={'./imgs/online_menu_1.png'} />
 				</Box>
 				<Box className={classes.imageBox}>
-					<img className={classes.img2} src={'/imgs/online_menu_2.png'} />
+					<img className={classes.img2} src={'./imgs/online_menu_2.png'} />
 				</Box>
 			</Box>
 			<Box className={classes.infoWrapper}>

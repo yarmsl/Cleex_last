@@ -50,7 +50,7 @@ const CallWaiterSection = (): ReactElement => {
 		<Container className={classes.root}>
 			<Box className={classes.imageWrapper}>
 				<Box className={classes.imageBox}>
-					<img className={classes.img} src={'/imgs/call_waiter.png'} />
+					<img className={classes.img} src={'./imgs/call_waiter.png'} />
 				</Box>
 			</Box>
 			<Box className={classes.info}>

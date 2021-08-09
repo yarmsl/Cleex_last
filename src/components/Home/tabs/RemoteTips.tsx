@@ -47,10 +47,10 @@ const RemoteTips = (): ReactElement => {
 		<>
 			<Box className={classes.imageWrapper}>
 				<Box className={classes.imageBox}>
-					<img className={classes.img1} src={'/imgs/tips_1.png'} />
+					<img className={classes.img1} src={'./imgs/tips_1.png'} />
 				</Box>
 				<Box className={classes.imageBox}>
-					<img className={classes.img2} src={'/imgs/tips_2.png'} />
+					<img className={classes.img2} src={'./imgs/tips_2.png'} />
 				</Box>
 			</Box>
 			<Box className={classes.infoWrapper}>

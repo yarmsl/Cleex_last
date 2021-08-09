@@ -111,7 +111,7 @@ const QrNfcInteraction = (): ReactElement => {
 		<Container className={classes.root}>
 			<Box className={classes.imageWrapper}>
 				<animated.div style={anim} ref={domTarget} className={classes.imageBox}>
-					<img className={classes.img} src={'/imgs/vCard.png'} />
+					<img className={classes.img} src={'./imgs/vCard.png'} />
 				</animated.div>
 			</Box>
 			<Box className={classes.info}>

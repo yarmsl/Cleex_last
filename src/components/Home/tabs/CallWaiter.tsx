@@ -38,7 +38,7 @@ const CallWaiter = (): ReactElement => {
 		<>
 			<Box className={classes.imageWrapper}>
 				<Box className={classes.imageBox}>
-					<img className={classes.image} src={'/imgs/call_waiter.png'} />
+					<img className={classes.image} src={'./imgs/call_waiter.png'} />
 				</Box>
 			</Box>
 			<Box className={classes.info}>

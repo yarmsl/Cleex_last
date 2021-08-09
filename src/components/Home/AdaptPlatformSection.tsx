@@ -65,13 +65,13 @@ const AdaptPlatformSection = (): ReactElement => {
 			</Box>
 			<Box className={classes.imageWrapper}>
 				<Box className={classes.imageBox}>
-					<img className={classes.img1} src={'/imgs/adapt_1.png'} />
+					<img className={classes.img1} src={'./imgs/adapt_1.png'} />
 				</Box>
 				<Box className={classes.imageBox}>
-					<img className={classes.img2} src={'/imgs/adapt_2.png'} />
+					<img className={classes.img2} src={'./imgs/adapt_2.png'} />
 				</Box>
 				<Box className={classes.imageBox}>
-					<img className={classes.img3} src={'/imgs/adapt_3.png'} />
+					<img className={classes.img3} src={'./imgs/adapt_3.png'} />
 				</Box>
 			</Box>
 		</Container>
