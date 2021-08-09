@@ -3,12 +3,12 @@ import { AppBar, Avatar, Button, ButtonGroup, Container, makeStyles } from '@mat
 import LogoCleex from './LogoCleex';
 import { useAuth } from '../lib/context/AuthCTX';
 
-const useStyles = makeStyles((themeCleex) => ({
+const useStyles = makeStyles((theme) => ({
 	root: {
 		height: 'auto',
 		backdropFilter: 'blur(6px)',
 		backgroundColor: 'rgba(255, 255, 255, 0.8)',
-		boxShadow: themeCleex.shadows[11],
+		boxShadow: theme.shadows[11],
 	},
 	header: {
 		height: '100%',
@@ -20,9 +20,6 @@ const useStyles = makeStyles((themeCleex) => ({
 	auth: {
 		display: 'flex'
 	}
-	// button: {
-	// 	background: 'linear-gradient(180deg, #FFECB9 0%, #AA9B71 100%)'
-	// }
 }));
 
 const Header = (): ReactElement => {

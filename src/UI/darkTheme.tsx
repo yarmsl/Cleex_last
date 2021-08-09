@@ -112,6 +112,20 @@ const theme = createTheme({
 				display: 'flex'
 			}
 		},
+		MuiFormLabel: {
+			root: {
+				'&$focused': {
+					color: '#aa9b71'
+				}
+			}
+		},
+		MuiInput: {
+			underline: {
+				'&:after': {
+					borderBottom: '2px solid #aa9b71'
+				}
+			}
+		},
 		MuiCssBaseline: {
 			'@global': {
 				'::-webkit-scrollbar': {

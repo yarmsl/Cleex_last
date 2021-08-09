@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		padding: '2px 0',
+		padding: '4px 0 2px',
 	},
 	logo: {
 		width: '80%',

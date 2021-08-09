@@ -7,7 +7,8 @@ import { CssBaseline } from '@material-ui/core';
 import ThemesProvider from './lib/context/ThemeCTX';
 import { useAuth } from './lib/context/AuthCTX';
 import CompanyProvider from './lib/context/CompanyCTX';
-import Topka from './pages/Topka';
+import Topka from './pages/Topka/Topka';
+import Login from './pages/Login';
 
 const Routes = (): ReactElement => {
 	const [isAuth] = useAuth();
@@ -17,13 +18,18 @@ const Routes = (): ReactElement => {
 			<CompanyProvider>
 				<CssBaseline />
 				<Router>
-					<MainLayout>
-						<Switch>
-							<Route exact path='/' component={Home} />
-							<Route exact path='/topka' component={Topka} />
-							<Route component={NotFound} />
-						</Switch>
-					</MainLayout>
+					<Switch>
+						<Route exact path={['/', '/login']}>
+							<MainLayout>
+								<Switch>
+									<Route exact path='/' component={Home} />
+									<Route exact path='/login' component={Login} />
+								</Switch>
+							</MainLayout>
+						</Route>
+						<Route exact path='/topka' component={Topka} />
+						<Route component={NotFound} />
+					</Switch>
 				</Router>
 			</CompanyProvider>
 		</ThemesProvider>
