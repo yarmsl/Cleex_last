@@ -5,7 +5,7 @@ const theme = createTheme({
 		values: {
 			xs: 0,
 			sm: 600,
-			md: 960,
+			md: 1024,
 			lg: 1280,
 			xl: 1920,
 		},
@@ -26,7 +26,7 @@ const theme = createTheme({
 		].join(','),
 		button: {
 			fontSize: 14,
-			fontWeigt: 500
+			fontWeigt: 700
 		},
 		h2: {
 			userSelect: 'none',
@@ -37,18 +37,19 @@ const theme = createTheme({
 			lineHeight: '50px'
 		},
 		h5: {
-			fontSize: '36px',
-			lineHeight: '50px'
+			fontSize: '18px',
+			lineHeight: '24px',
+			fontWeight: 700
 		},
 		body1: {
-			fontSize: '24px',
-			fontWeight: 400,
-			lineHeight: '32px'
+			fontSize: '14px',
+			fontWeight: 700,
+			lineHeight: '19px'
 		},
 		body2: {
-			fontSize: '18px',
+			fontSize: '14px',
 			fontWeight: 400,
-			lineHeight: '24px'
+			lineHeight: '19px'
 		},
 		subtitle1: {
 			textTransform: 'uppercase',
@@ -61,26 +62,26 @@ const theme = createTheme({
 	},
 	palette: {
 		primary: {
-			light: '#ffecb9',
-			main: '#ffecb9',
-			dark: '#e7d6a5',
-			contrastText: '#192021'
+			light: '#78BBE1',
+			main: '#78BBE1',
+			dark: '#78BBE1',
+			contrastText: '#fff'
 		},
 		secondary: {
-			light: '#f5f2ed',
-			main: '#fff',
-			dark: '#c4c4c4',
-			contrastText: '#192021'
+			light: '#ffffff',
+			main: '#ffffff',
+			dark: '#ffffff',
+			contrastText: '#000'
 		},
 		error: {
-			main: '#f47979'
+			main: '#fff'
 		},
 		text: {
-			primary: '#192021',
-			secondary: '#aa9b71'
+			primary: '#ffffff',
+			secondary: '#000000'
 		},
 		background: {
-			default: '#fff'
+			default: '#2E3435'
 		}
 	},
 	shadows: [
@@ -114,6 +115,12 @@ const theme = createTheme({
 		borderRadius: 8,
 	},
 	overrides: {
+		MuiButton: {
+			label: {
+				fontSize: '14px',
+				fontWeight: 700
+			}
+		},
 		MuiContainer: {
 			root: {
 				display: 'flex'
@@ -122,15 +129,23 @@ const theme = createTheme({
 		MuiFormLabel: {
 			root: {
 				'&$focused': {
-					color: '#aa9b71'
+					color: '#78BBE1'
 				}
 			}
 		},
 		MuiInput: {
 			underline: {
 				'&:after': {
-					borderBottom: '2px solid #aa9b71'
+					borderBottom: '2px solid #78BBE1'
+				},
+				'&:before': {
+					borderBottom: '2px solid #fff'
 				}
+			}
+		},
+		MuiInputBase: {
+			input: {
+				borderColor: '#fff'
 			}
 		},
 		MuiCssBaseline: {

@@ -3,14 +3,22 @@ import React, { ReactElement } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 // import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
 	root: {
 		width: '100%',
 		height: '100%',
+		marginTop: '48px',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center'
+	},
+	container: {
+		boxShadow: theme.shadows[11],
+		borderRadius: theme.shape.borderRadius,
+		boxSizing: 'border-box',
+		paddingTop: '8px',
+		paddingBottom: '8px'
 	},
 	wrapper: {
 		width: '100%',
@@ -31,7 +39,7 @@ const Login = (): ReactElement => {
 	};
 	return (
 		<Box className={classes.root}>
-			<Container maxWidth='xs'>
+			<Container maxWidth='xs' className={classes.container}>
 				<Box component='form' onSubmit={handleSubmit(onSubmit)} className={classes.wrapper}>
 					<Typography >Войдите в систему</Typography>
 					<Controller
@@ -41,7 +49,7 @@ const Login = (): ReactElement => {
 						render={({ field: { onChange, value }, fieldState: { error } }) => (
 							<TextField label='Логин'
 								fullWidth
-								variant='outlined'
+								color='primary'
 								size='small'
 								type="text"
 								autoComplete="on"
@@ -58,7 +66,6 @@ const Login = (): ReactElement => {
 						render={({ field: { onChange, value }, fieldState: { error } }) => (
 							<TextField label='Пароль'
 								fullWidth
-								variant='outlined'
 								size='small'
 								type="password"
 								autoComplete="on"

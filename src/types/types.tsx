@@ -2,7 +2,7 @@ import { Theme } from '@material-ui/core';
 import React from 'react';
 
 export interface Child  {
-	children?: React.ReactNode;
+	children: React.ReactFragment;
 }
 
 export type Themes = 'light' | 'dark';
@@ -39,4 +39,9 @@ export interface svgIcon {
 
 export interface TabsProps {
 	scrollTo: (page: number) => void;
+}
+
+export interface avatarUI extends Child {
+	size?: string;
+	source?: string;
 }

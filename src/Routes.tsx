@@ -9,6 +9,9 @@ import { useAuth } from './lib/context/AuthCTX';
 import CompanyProvider from './lib/context/CompanyCTX';
 import Topka from './pages/Topka/Topka';
 import Login from './pages/Login';
+import TopkaLayout from './layouts/TopkaLayout';
+import LeaveTips from './pages/Topka/LeaveTips';
+import Menu from './pages/Topka/Menu';
 
 const Routes = (): ReactElement => {
 	const [isAuth] = useAuth();
@@ -27,7 +30,15 @@ const Routes = (): ReactElement => {
 								</Switch>
 							</MainLayout>
 						</Route>
-						<Route exact path='/topka' component={Topka} />
+						<Route exact path={['/topka', '/topka/leavetips', '/topka/menu']}>
+							<TopkaLayout>
+								<Switch>
+									<Route exact path='/topka' component={Topka} />
+									<Route exact path='/topka/leavetips' component={LeaveTips}/>
+									<Route exact path='/topka/menu' component={Menu}/>
+								</Switch>
+							</TopkaLayout>
+						</Route>
 						<Route component={NotFound} />
 					</Switch>
 				</Router>
