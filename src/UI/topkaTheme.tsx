@@ -116,6 +116,9 @@ const theme = createTheme({
 	},
 	overrides: {
 		MuiButton: {
+			root: {
+				minWidth: '56px',
+			},
 			label: {
 				fontSize: '14px',
 				fontWeight: 700
@@ -128,6 +131,7 @@ const theme = createTheme({
 		},
 		MuiFormLabel: {
 			root: {
+				color: '#fff',
 				'&$focused': {
 					color: '#78BBE1'
 				}

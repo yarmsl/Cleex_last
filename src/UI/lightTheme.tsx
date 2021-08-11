@@ -121,8 +121,9 @@ const theme = createTheme({
 		},
 		MuiFormLabel: {
 			root: {
+				color: '#000',
 				'&$focused': {
-					color: '#aa9b71'
+					color: '#000'
 				}
 			}
 		},

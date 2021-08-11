@@ -1,8 +1,8 @@
 import React, { ReactElement, useEffect } from 'react';
 import { Box, Button, makeStyles } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { useCompany } from '../../lib/context/CompanyCTX';
-import TopkaLogo from '../../components/TopkaLogo';
+import TopkaLogo from '../components/TopkaLogo';
+import { useStage } from '../lib/context/StageCTX';
 
 const useStyles = makeStyles(() => ({
 	top: {
@@ -24,14 +24,17 @@ const useStyles = makeStyles(() => ({
 	},
 }));
 
-const Topka = (): ReactElement => {
+const Menu = (): ReactElement => {
 	const classes = useStyles();
-	const {switchCompany} = useCompany();
-	useEffect(() => {
-		switchCompany('topka');
-	},[]);
 	const router = useHistory();
+
 	console.log(router);
+
+	const { setHeaderMobileTitle } = useStage();
+	
+	useEffect(() => {
+		setHeaderMobileTitle('Меню');
+	}, []);
 
 	return (
 		<>
@@ -39,12 +42,12 @@ const Topka = (): ReactElement => {
 				<TopkaLogo/>
 			</Box>
 			<Box className={classes.bottom}>
-				<Button variant='contained' size='large' onClick={() => router.push('/topka/menu')}>Меню</Button>
-				<Button variant='contained' size='large' onClick={() => router.push('/topka/leavetips')}>Оставить чаевые</Button>
-				<Button variant='contained' size='large'>Вызвать официанта</Button>
+				<Button variant='contained' size='large'>Кухня</Button>
+				<Button variant='contained' size='large'>Бар</Button>
+				<Button variant='contained' size='large'>Коктейльная карта</Button>
 			</Box>
 		</>
 	);
 };
 
-export default Topka;
+export default Menu;

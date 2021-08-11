@@ -1,10 +1,11 @@
-import React, { ChangeEvent, ReactElement, useState } from 'react';
+import React, { ChangeEvent, ReactElement, useState, useEffect } from 'react';
 import { Box, Button, Checkbox, Link, makeStyles, TextField, Typography } from '@material-ui/core';
-import Waiter from '../../components/Waiter';
+import Waiter from '../components/Waiter';
 import { Link as RouterLink } from 'react-router-dom';
 import CheckBoxOutlineBlankRoundedIcon from '@material-ui/icons/CheckBoxOutlineBlankRounded';
 import { CreditCardRounded } from '@material-ui/icons';
-import { addRubbleMark, onlyDigits, rounded } from '../../lib/services';
+import { addRubbleMark, onlyDigits, rounded } from '../lib/services';
+import { useStage } from '../lib/context/StageCTX';
 
 const useStyles = makeStyles((theme) => ({
 	bottom: {
@@ -13,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 		boxSizing: 'border-box',
 		padding: '12px 32px 0',
 		backgroundColor: theme.palette.background.default,
+		boxShadow: theme.shadows[11],
 		borderTopLeftRadius: 24,
 		borderTopRightRadius: 24,
 	},
@@ -43,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 	payBtn: {
 		width: '100%',
 		borderRadius: 4,
-		margin: '18px 0',
+		margin: '24px 0',
 		'& span': {
 			textTransform: 'none',
 			fontSize: '18px',
@@ -54,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 		margin: '4px 0',
 		display: 'flex',
-		alignItems: 'flex-start',
+		alignItems: 'center',
 	}
 }));
 const maxSum = 9999;
@@ -70,6 +72,11 @@ const LeaveTips = (): ReactElement => {
 	const [comCheck, setComCheck] = useState(true);
 	const [policyCheck, setPolicyCheck] = useState(true);
 	const classes = useStyles();
+	const { setHeaderMobileTitle } = useStage();
+	
+	useEffect(() => {
+		setHeaderMobileTitle('Оставить чаевые');
+	}, []);
 
 	const inputSum = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		let a: string = e.target.value;
@@ -133,7 +140,7 @@ const LeaveTips = (): ReactElement => {
 						checked={policyCheck}
 						onChange={e => setPolicyCheck(e.target.checked)}
 						color='primary'
-						icon={<CheckBoxOutlineBlankRoundedIcon color='secondary' fontSize='medium' />}
+						icon={<CheckBoxOutlineBlankRoundedIcon color='secondary' />}
 					/>
 					<Typography variant='body2' color='textPrimary'>Я согласен с условиями
 						<Link color='primary' underline='hover' variant='subtitle2' component={RouterLink} to='/'> Пользовательского соглашения </Link>

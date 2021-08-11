@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AvatarUI from '../UI/AvatarUI';
+import { useStage } from '../lib/context/StageCTX';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -26,12 +27,12 @@ const useStyles = makeStyles((theme) => ({
 const HeaderMobile = (): ReactElement => {
 	const router = useHistory();
 	const classes = useStyles();
-	console.log(router);
-
+	const {headerMobileTitle} = useStage();
+	
 	return (
 		<AppBar className={classes.root} position='sticky'>
 			<Box className={classes.left}><IconButton color='inherit' onClick={() => router.goBack()} ><ArrowBackIcon color='inherit'/></IconButton></Box>
-			<Box><Typography>Title</Typography></Box>
+			<Box><Typography variant='h6' >{headerMobileTitle}</Typography></Box>
 			<Box className={classes.right}><IconButton><AvatarUI>AP</AvatarUI></IconButton></Box>
 		</AppBar>
 	);

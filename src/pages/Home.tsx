@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef, useEffect } from 'react';
+import React, { ReactElement, useRef } from 'react';
 import AdaptPlatformSection from '../components/Home/AdaptPlatformSection';
 import CallWaiterSection from '../components/Home/CallWaiterSection';
 import NewLevelOfService from '../components/Home/NewLevelOfService';
@@ -11,7 +11,6 @@ import QrNfcInteraction from '../components/Home/QrNfcInteraction';
 import BecomePartnerForm from '../components/BecomePartnerForm';
 import { makeStyles } from '@material-ui/core';
 import Footer from '../components/Footer';
-import { useCompany } from '../lib/context/CompanyCTX';
 
 const useStyles = makeStyles(() => ({
 	center: {
@@ -33,12 +32,6 @@ const useStyles = makeStyles(() => ({
 
 function Home(): ReactElement {
 	
-	const {company, switchCompany} = useCompany();
-	useEffect(() => {
-		switchCompany('cleex');
-	},[]);
-	console.log(company);
-
 	const classes = useStyles();
 	const paral = useRef({} as IParallax);
 

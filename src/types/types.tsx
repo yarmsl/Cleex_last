@@ -16,15 +16,9 @@ export interface ThemeCtx {
 	switchTheme: (str: Themes) => void;
 }
 
-export type Companies = 'cleex' | 'topka';
-
-export interface CompanyAction {
-	type: Companies;
-}
-
-export interface CompanyCtx {
-	company: Companies;
-	switchCompany: (str: Companies) => void;
+export interface StageCTX {
+	headerMobileTitle: string;
+    setHeaderMobileTitle: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface MetaLT extends Child {
@@ -44,4 +38,29 @@ export interface TabsProps {
 export interface avatarUI extends Child {
 	size?: string;
 	source?: string;
+}
+
+export interface LoginData {
+	login: string;
+	password: string;
+}
+
+export interface User {
+	data_job_begin?: string | null;
+	data_job_end?: string | null;
+	email?: string;
+	id: number;
+	institution_id: number;
+	login: string;
+	name?: string;
+	photo?: string;
+	position: number;
+	slogan?: string
+}
+
+export interface loginResponse {
+	access_token: string;
+	message: string;
+	refresh_token: string;
+	user: User;
 }
