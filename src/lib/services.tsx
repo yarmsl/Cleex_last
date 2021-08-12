@@ -1,6 +1,6 @@
-export const initials = (str: string): string => {
+export const initials = (str?: string): string | undefined => {
 	if (!str) {
-		return ' ';
+		return undefined;
 	}
 	if (str.indexOf(' ') !== -1) {
 		str = `${str.substr(0, 1)}${str.substr(str.indexOf(' ') + 1, 1)}`;

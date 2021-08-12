@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Box, makeStyles, Typography } from '@material-ui/core';
 import AvatarUI from '../UI/AvatarUI';
+import { WaiterComp } from '../types/types';
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -14,21 +15,22 @@ const useStyles = makeStyles(() => ({
 		margin: '8px 0',
 		textShadow: '1px 1px 4px #000'
 	},
-	motto: {
+	slogan: {
 		width: '60%',
 		textAlign: 'center',
 		textShadow: '1px 1px 4px #000'
 	}
 }));
-const Waiter = (): ReactElement => {
+
+const Waiter = ({name, slogan, source, size='120'}: WaiterComp ): ReactElement => {
 
 	const classes = useStyles();
 
 	return (
 		<Box className={classes.root}>
-			<AvatarUI size='120'>AP</AvatarUI>
-			<Typography color='textPrimary' className={classes.name} variant='h5'>Fktrctq</Typography>
-			<Typography color='textPrimary' className={classes.motto}>kgfoigjg - ergfer ergfergerg fghgjuk</Typography>
+			<AvatarUI size={size} source={source}>{name}</AvatarUI>
+			<Typography color='textPrimary' className={classes.name} variant='h5'>{name}</Typography>
+			<Typography color='textPrimary' className={classes.slogan}>{slogan}</Typography>
 		</Box>
 	);
 };

@@ -2,7 +2,7 @@ import { Theme } from '@material-ui/core';
 import React from 'react';
 
 export interface Child  {
-	children: React.ReactFragment;
+	children?: React.ReactFragment;
 }
 
 export type Themes = 'light' | 'dark';
@@ -35,8 +35,11 @@ export interface TabsProps {
 	scrollTo: (page: number) => void;
 }
 
-export interface avatarUI extends Child {
-	size?: string;
+export type avatarSize = '40' | '60' | '80' | '100' | '120';
+
+export interface avatarUI {
+	children?: string;
+	size?: avatarSize;
 	source?: string;
 }
 
@@ -63,4 +66,11 @@ export interface loginResponse {
 	message: string;
 	refresh_token: string;
 	user: User;
+}
+
+export interface WaiterComp {
+	name?: string;
+	slogan?: string;
+	source?: string;
+	size?: avatarSize;
 }

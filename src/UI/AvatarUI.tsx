@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Avatar, makeStyles } from '@material-ui/core';
 import { avatarUI } from '../types/types';
+import { initials } from '../lib/services';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -9,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const AvatarUI = ({children, size, source}: avatarUI ): ReactElement => {
+const AvatarUI = ({children, size='40', source}: avatarUI ): ReactElement => {
 
 	const classes = useStyles();
 	const styles = {
@@ -21,7 +22,7 @@ const AvatarUI = ({children, size, source}: avatarUI ): ReactElement => {
 	};
 	return (
 		<Avatar style={styles.avatar} src={source} className={classes.root}>
-			{children}
+			{initials(children)}
 		</Avatar>
 	);
 };

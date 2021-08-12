@@ -33,7 +33,7 @@ const HeaderMobile = (): ReactElement => {
 		<AppBar className={classes.root} position='sticky'>
 			<Box className={classes.left}><IconButton color='inherit' onClick={() => router.goBack()} ><ArrowBackIcon color='inherit'/></IconButton></Box>
 			<Box><Typography variant='h6' >{headerMobileTitle}</Typography></Box>
-			<Box className={classes.right}><IconButton><AvatarUI>AP</AvatarUI></IconButton></Box>
+			<Box className={classes.right}><IconButton><AvatarUI>d f</AvatarUI></IconButton></Box>
 		</AppBar>
 	);
 };

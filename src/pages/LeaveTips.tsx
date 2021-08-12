@@ -95,7 +95,7 @@ const LeaveTips = (): ReactElement => {
 
 	return (
 		<>
-			<Waiter />
+			<Waiter/>
 			<Box className={classes.bottom}>
 				<TextField
 					value={sum}
