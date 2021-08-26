@@ -6,6 +6,7 @@ import { WaiterComp } from '../types/types';
 const useStyles = makeStyles(() => ({
 	root: {
 		width: '100%',
+		height: '240px',
 		padding: '24px 0',
 		display: 'flex',
 		flexDirection: 'column',
@@ -16,14 +17,14 @@ const useStyles = makeStyles(() => ({
 		textShadow: '1px 1px 4px #000'
 	},
 	slogan: {
-		width: '60%',
+		maxWidth: '60%',
+		wordBreak: 'break-all',
 		textAlign: 'center',
 		textShadow: '1px 1px 4px #000'
 	}
 }));
 
 const Waiter = ({name, slogan, source, size='120'}: WaiterComp ): ReactElement => {
-
 	const classes = useStyles();
 
 	return (

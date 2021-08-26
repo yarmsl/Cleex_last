@@ -1,7 +1,9 @@
 import React, { ReactElement, useState, useEffect } from 'react';
-import { Box, Button, makeStyles, Typography } from '@material-ui/core';
+import { Backdrop, Box, Button, CircularProgress, Container, makeStyles, Typography } from '@material-ui/core';
 import { useStage } from '../lib/context/StageCTX';
-import { getDataByPost } from '../lib/fetch';
+import { DeleteData, getData, PostData } from '../lib/fetch';
+import { useHistory } from 'react-router';
+import { askForPermissioToReceiveNotifications } from '../push-notification';
 
 const useStyles = makeStyles((theme) => ({
 	blueprint: {
@@ -71,34 +73,60 @@ const useStyles = makeStyles((theme) => ({
 			width: '40%',
 			maxWidth: '200px'
 		}
+	},
+	backdrop: {
+		zIndex: 100,
 	}
 }));
 
-const Tables = (): ReactElement => {
-	const classes = useStyles();
+interface TablesProps {
+	busy_tables: number[];
+	message: string;
+	number_of_tables: number;
+	self_tables: number[];
+}
 
+const Tables = (): ReactElement => {
+	const router = useHistory();
+	const classes = useStyles();
+	const { getId } = useStage();
 	const { setHeaderMobileTitle } = useStage();
-	
+	const [tablesData, setTablesData] = useState({} as TablesProps);
+
+	const [loading, setLoading] = useState(true);
+
+	const getTables = () => {
+		getData(`tables/${getId()}`)
+			.then(r => {
+				if (r !== null || r !== undefined) {
+					setTablesData(r as TablesProps);
+					console.log(tablesData);
+					setLoading(false);
+				} else {
+					return router.push('/topka/account');
+				}
+			});
+	};
+
 	useEffect(() => {
 		setHeaderMobileTitle('Выбрать столик');
+		getTables();
 	}, []);
-
-	const tableCount = 7;
-	const busyTables = [1, 2];
-	const selfBusyTables = [2];
 
 	const [tables, setTables] = useState([] as number[]);
 	const [selectedTables, setSelectedTables] = useState([] as number[]);
 
 	useEffect(() => {
-		for (let i = 1; i <= tableCount; i++) {
-			if (tables.length === tableCount) {
-				setTables(tables);
-			} else {
-				setTables(p => [...p, i]);
+		if (tablesData !== undefined) {
+			for (let i = 1; i <= tablesData.number_of_tables; i++) {
+				if (tables.length === tablesData.number_of_tables) {
+					setTables(tables);
+				} else {
+					setTables(p => [...p, i]);
+				}
 			}
 		}
-	}, [tableCount]);
+	}, [loading]);
 
 	const selectTable = (num: number) => {
 		if (selectedTables.includes(num)) {
@@ -107,44 +135,62 @@ const Tables = (): ReactElement => {
 			setSelectedTables(p => [...p, num].sort());
 		}
 	};
-	console.log(selectedTables);
 
 	const sendTables = () => {
 		if (selectedTables?.length > 0) {
-			getDataByPost('/3242', selectedTables);
+			askForPermissioToReceiveNotifications(getId());
+			setLoading(true);
+			PostData(`tables/${getId()}`, { selected_tables: selectedTables })
+				.then(() => {
+					
+					setSelectedTables([]);
+					getTables();
+				});
 		}
-		setSelectedTables([]);
+	};
+
+	const dischargeTables = () => {
+		setLoading(true);
+		DeleteData(`tables/${getId()}`)
+			.then(() => getTables());
 	};
 
 	return (
 		<>
-			<Box className={classes.blueprint}>
-				<Box className={classes.barBox}>
-					<Box className={classes.bar}>
-						<Typography variant='h6' color='textPrimary'>Бар</Typography>
-					</Box>
-				</Box>
-				<Box className={classes.tables}>
-					{tables.map(table => {
-						return (
-							<Button
-								onClick={() => selectTable(table)}
-								key={table}
-								variant='contained'
-								className={[ classes.table, selfBusyTables.includes(table) ? classes.selfBusy : undefined, table === 3 ? classes.specialTable : undefined].join(' ')}
-								style={selectedTables.includes(table) ? {backgroundColor: '#78BBE1'} : undefined}
-								disabled={busyTables.includes(table) ? true : false}
-							>
-								{table}
-							</Button>
-						);
-					})}
-				</Box>
-			</Box>
-			<Box className={classes.actions}>
-				<Button onClick={() => setSelectedTables([])} variant='outlined' color='primary'>Сброс</Button>
-				<Button onClick={() => sendTables()} variant='contained'>Выбрать</Button>
-			</Box>
+			{loading ?
+				<Backdrop className={classes.backdrop} open={loading}>
+					<CircularProgress color='primary' />
+				</Backdrop>
+				:
+				<>
+					<Container maxWidth='sm' className={classes.blueprint}>
+						<Box className={classes.barBox}>
+							<Box className={classes.bar}>
+								<Typography variant='h6' color='textPrimary'>Бар</Typography>
+							</Box>
+						</Box>
+						<Box className={classes.tables}>
+							{tablesData !== undefined && tables.map(table => {
+								return (
+									<Button
+										onClick={() => selectTable(table)}
+										key={table}
+										variant='contained'
+										className={[classes.table, tablesData.self_tables.includes(table) ? classes.selfBusy : undefined, table === 3 ? classes.specialTable : undefined].join(' ')}
+										style={selectedTables.includes(table) ? { backgroundColor: '#78BBE1' } : undefined}
+										disabled={tablesData.busy_tables.includes(table) ? true : false}
+									>
+										{table}
+									</Button>
+								);
+							})}
+						</Box>
+					</Container>
+					<Container maxWidth='sm' className={classes.actions}>
+						<Button onClick={() => dischargeTables()} variant='outlined' color='primary'>Сброс</Button>
+						<Button onClick={() => sendTables()} variant='contained'>Выбрать</Button>
+					</Container>
+				</>}
 		</>
 	);
 };

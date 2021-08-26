@@ -10,8 +10,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const AvatarUI = ({children, size='40', source}: avatarUI ): ReactElement => {
-
+const AvatarUI = ({children, size='40', source, onClick}: avatarUI ): ReactElement => {
 	const classes = useStyles();
 	const styles = {
 		avatar: {
@@ -21,7 +20,7 @@ const AvatarUI = ({children, size='40', source}: avatarUI ): ReactElement => {
 		}
 	};
 	return (
-		<Avatar style={styles.avatar} src={source} className={classes.root}>
+		<Avatar onClick={onClick} style={styles.avatar} src={source} className={classes.root}>
 			{initials(children)}
 		</Avatar>
 	);

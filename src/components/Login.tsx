@@ -1,10 +1,11 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import { Button, Box, makeStyles, Typography, TextField } from '@material-ui/core';
 import { useForm, Controller } from 'react-hook-form';
 import { basicLogin } from '../lib/fetch';
-import { API_KEY } from '../lib/constants';
+import { STATIC_URL } from '../lib/constants';
 import { LoginData, loginResponse } from '../types/types';
 import { login } from '../lib/context/AuthCTX';
+import { useStage } from '../lib/context/StageCTX';
 
 const useStyles = makeStyles(() => ({
 	wrapper: {
@@ -18,24 +19,47 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Login = (): ReactElement => {
-	const [user, setUser] = useState({} as loginResponse);
-	const { handleSubmit, control } = useForm();
+	const { setUser, setId } = useStage();
+	const { handleSubmit, control, setError } = useForm();
 	const classes = useStyles();
 	const onSubmit = (data: LoginData) => {
-		basicLogin(`${API_KEY}/login`, data)
+		basicLogin('login', data)
 			.then(r => {
-				setUser(r as loginResponse);
-				console.log(r);
-			})
-			.catch(e => console.error(e));
-	};
+				if (r !== undefined) {
+					const a = r as loginResponse;
+					switch (a.message) {
+					case 'success':
+						return (
+							console.log(a),
+							setUser(a.user),
+							setUser(p => {
+								return {
+									...p,
+									photo: `${STATIC_URL}/${p.photo}`
+								};
+							}),
+							setId(String(a.user.id)),
+							login({ accessToken: a.access_token, refreshToken: a.refresh_token })
+						);
+					case 'wrong password':
+						return (
+							setError('password', { type: 'manual', message: 'Неправильный пароль' })
+						);
+					case 'login does not exist':
+						return (
+							setError('login', { type: 'manual', message: 'Пользователь не найден' })
+						);
+					default:
+						return (
+							setError('password', { type: 'manual', message: 'Неизвестная ошибка'})
+						);
+					}
+				} else {
+					setError('password', {type: 'manual', message: 'Сервер не отвечает'});
+				}
 
-	useEffect(() => {
-		console.log(user);
-		if (user.message !== 'wrong password' && user.message !== 'login does not exist') {
-			login({accessToken: user.access_token, refreshToken: user.refresh_token }); // Проблема с исчезающим сторажем здесь!!!
-		}
-	}, [user]);
+			});
+	};
 
 	return (
 		<Box component='form' onSubmit={handleSubmit(onSubmit)} className={classes.wrapper}>
@@ -55,7 +79,7 @@ const Login = (): ReactElement => {
 						onChange={onChange}
 						error={!!error} helperText={error ? error.message : ' '} />
 				)}
-				rules={{ required: 'Введите логин'}}
+				rules={{ required: 'Введите логин' }}
 			/>
 			<Controller
 				name="password"
@@ -71,7 +95,7 @@ const Login = (): ReactElement => {
 						onChange={onChange}
 						error={!!error} helperText={error ? error.message : ' '} />
 				)}
-				rules={{ required: 'Введите пароль'}}
+				rules={{ required: 'Введите пароль' }}
 			/>
 			<Button type='submit' variant='contained' color='primary'>Войти</Button>
 		</Box>

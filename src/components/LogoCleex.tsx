@@ -3,7 +3,7 @@ import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import Logo from '../UI/icons/Logo';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
 	logoButton: {
 		height: 'auto',
 		width: '200px',
@@ -11,7 +11,11 @@ const useStyles = makeStyles(() => ({
 		borderRadius: '0',
 		'&>*': {
 			height: '100%',
+		},
+		[theme.breakpoints.down(500)]: {
+			width: 'auto',
 		}
+
 	},
 	logoBox: {
 		height: '100%',
@@ -20,13 +24,23 @@ const useStyles = makeStyles(() => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		padding: '4px 0 2px',
+		[theme.breakpoints.down(500)]: {
+			width: '100px',
+			alignItems: 'flex-start',
+		}
 	},
 	logo: {
 		width: '80%',
-		
+		[theme.breakpoints.down(500)]: {
+			width: '100%'
+		}
+
 	},
 	logoSub: {
-		fontSize: '9px'
+		fontSize: '9px',
+		[theme.breakpoints.down(500)]: {
+			display: 'none'
+		}
 	}
 }));
 

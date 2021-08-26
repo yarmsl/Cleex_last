@@ -1,7 +1,7 @@
-import React, { ChangeEvent, ReactElement, useState, useEffect } from 'react';
-import { Box, Button, Checkbox, Link, makeStyles, TextField, Typography } from '@material-ui/core';
+import React, { ReactElement, useState, useEffect } from 'react';
+import { Box, Button, Container, Checkbox, Link, makeStyles, TextField, Typography } from '@material-ui/core';
 import Waiter from '../components/Waiter';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import CheckBoxOutlineBlankRoundedIcon from '@material-ui/icons/CheckBoxOutlineBlankRounded';
 import { CreditCardRounded } from '@material-ui/icons';
 import { addRubbleMark, onlyDigits, rounded } from '../lib/services';
@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
 		height: '100%',
 		boxSizing: 'border-box',
 		padding: '12px 32px 0',
+		flexDirection: 'column',
 		backgroundColor: theme.palette.background.default,
 		boxShadow: theme.shadows[11],
 		borderTopLeftRadius: 24,
@@ -67,19 +68,21 @@ const tea = ['100', '200', '300', '500'];
 
 
 const LeaveTips = (): ReactElement => {
+	const router = useHistory();
 	const [sum, setSum] = useState('100 ₽');
 	const [error, setError] = useState(' ');
 	const [comCheck, setComCheck] = useState(true);
 	const [policyCheck, setPolicyCheck] = useState(true);
 	const classes = useStyles();
-	const { setHeaderMobileTitle } = useStage();
-	
+	const { setHeaderMobileTitle, waiter, getWaierIfNeed } = useStage();
+
 	useEffect(() => {
 		setHeaderMobileTitle('Оставить чаевые');
+		getWaierIfNeed(router.location.search);
 	}, []);
 
-	const inputSum = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-		let a: string = e.target.value;
+	const inputSum = (str: string) => {
+		let a: string = str;
 		a = onlyDigits(a);
 		let b: number = +a;
 		if (b < minSum) {
@@ -90,22 +93,23 @@ const LeaveTips = (): ReactElement => {
 			setError(`Максимум можно оставить только ${maxSum} ₽`);
 		}
 		a = String(b);
-		setSum(a);
+		a = addRubbleMark(a);
+		return a;
 	};
 
 	return (
 		<>
-			<Waiter/>
-			<Box className={classes.bottom}>
+			<Waiter source={waiter.photo} name={waiter.name} slogan={waiter.slogan} />
+			<Container maxWidth='sm' className={classes.bottom}>
 				<TextField
 					value={sum}
-					onChange={e => inputSum(e)}
-					onBlur={() => setSum(addRubbleMark(sum))}
+					onChange={e => setSum(e.target.value)}
+					onBlur={() => setSum(inputSum(sum))}
 					onFocus={() => setSum(onlyDigits(sum))}
-					inputProps={{ className: classes.input }}
+					inputProps={{ className: classes.input, maxLength: 5 }}
 					fullWidth
 					color='primary'
-					error={!!error}
+					error={error === ' ' ? false : true}
 					helperText={error ? error : ' '}
 				/>
 				<Box className={classes.teaBtns}>
@@ -148,7 +152,7 @@ const LeaveTips = (): ReactElement => {
 						<Link color='primary' underline='hover' variant='subtitle2' component={RouterLink} to='/'> Политикой обработки персональных данных</Link>
 					</Typography>
 				</Box>
-			</Box>
+			</Container>
 		</>
 	);
 };

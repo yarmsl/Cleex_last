@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AvatarUI from '../UI/AvatarUI';
 import { useStage } from '../lib/context/StageCTX';
+import { useAuth } from '../lib/context/AuthCTX';
+import { isEmpty } from '../lib/services';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -25,15 +27,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HeaderMobile = (): ReactElement => {
+	const [isAuth] = useAuth();
 	const router = useHistory();
 	const classes = useStyles();
-	const {headerMobileTitle} = useStage();
-	
+	const {user, waiter, headerMobileTitle} = useStage();
+
 	return (
 		<AppBar className={classes.root} position='sticky'>
-			<Box className={classes.left}><IconButton color='inherit' onClick={() => router.goBack()} ><ArrowBackIcon color='inherit'/></IconButton></Box>
+			<Box className={classes.left}><IconButton color='inherit' onClick={() => router.goBack()} ><ArrowBackIcon color='inherit' /></IconButton></Box>
 			<Box><Typography variant='h6' >{headerMobileTitle}</Typography></Box>
-			<Box className={classes.right}><IconButton><AvatarUI>d f</AvatarUI></IconButton></Box>
+			<Box className={classes.right}>
+				{router.location.pathname.indexOf('account') === -1 && !isEmpty(waiter) && <IconButton onClick={() => router.push('/topka/leavetips')}><AvatarUI source={waiter.photo} >{waiter.name}</AvatarUI></IconButton>}
+				{router.location.pathname.indexOf('account') !== -1 && isAuth && <IconButton onClick={() => router.push('/topka/account/settings')}><AvatarUI source={user.photo} >{user.name}</AvatarUI></IconButton>}
+			</Box>
 		</AppBar>
 	);
 };

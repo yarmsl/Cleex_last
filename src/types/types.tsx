@@ -1,24 +1,7 @@
-import { Theme } from '@material-ui/core';
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 
-export interface Child  {
+export interface Child {
 	children?: React.ReactFragment;
-}
-
-export type Themes = 'light' | 'dark';
-
-export interface LDTheme {
-	type: Themes;
-}
-
-export interface ThemeCtx {
-	theme?: Theme;
-	switchTheme: (str: Themes) => void;
-}
-
-export interface StageCTX {
-	headerMobileTitle: string;
-    setHeaderMobileTitle: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface MetaLT extends Child {
@@ -33,6 +16,7 @@ export interface svgIcon {
 
 export interface TabsProps {
 	scrollTo: (page: number) => void;
+	noParallax?: boolean;
 }
 
 export type avatarSize = '40' | '60' | '80' | '100' | '120';
@@ -41,6 +25,7 @@ export interface avatarUI {
 	children?: string;
 	size?: avatarSize;
 	source?: string;
+	onClick?: MouseEventHandler;
 }
 
 export interface LoginData {
@@ -49,16 +34,16 @@ export interface LoginData {
 }
 
 export interface User {
-	data_job_begin?: string | null;
-	data_job_end?: string | null;
-	email?: string;
+	data_job_begin: string | null;
+	data_job_end: string | null;
+	email: string;
 	id: number;
 	institution_id: number;
 	login: string;
-	name?: string;
-	photo?: string;
+	name: string;
+	photo: string;
 	position: number;
-	slogan?: string
+	slogan: string;
 }
 
 export interface loginResponse {
@@ -68,9 +53,46 @@ export interface loginResponse {
 	user: User;
 }
 
+export interface userResponse {
+	message: string;
+	user: User;
+}
+
+export interface StageCTX {
+	headerMobileTitle: string;
+	setHeaderMobileTitle: React.Dispatch<React.SetStateAction<string>>;
+	user: User;
+	setUser: React.Dispatch<React.SetStateAction<User>>;
+	setId: (id: string) => void;
+	getId: () => string;
+	removeId: () => void;
+	waiter: User;
+	setWaiter: React.Dispatch<React.SetStateAction<User>>;
+	getWaierIfNeed: (route: string) => void;
+}
+
 export interface WaiterComp {
 	name?: string;
 	slogan?: string;
 	source?: string;
 	size?: avatarSize;
+}
+
+export type policiesTypes = '/useragreement' | '/privacypolicy';
+
+export interface PoliciesProps {
+	policy?: policiesTypes;
+}
+
+
+export interface PoliciesListItem {
+	titel?: string;
+	subtitel: string;
+	index: number;
+	url: string;
+}
+
+export interface SettingsProps {
+	name: string;
+	slogan: string;
 }

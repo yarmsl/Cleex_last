@@ -1,3 +1,5 @@
+import { User, userResponse } from '../types/types';
+
 export const initials = (str?: string): string | undefined => {
 	if (!str) {
 		return undefined;
@@ -10,7 +12,7 @@ export const initials = (str?: string): string | undefined => {
 	return str.toUpperCase();
 };
 
-export const addRubbleMark = (str: string):string => {
+export const addRubbleMark = (str: string): string => {
 	if (str.indexOf('₽') !== -1) {
 		return str;
 	} else if (!str) {
@@ -30,4 +32,14 @@ export const onlyDigits = (str: string): string => {
 
 export const rounded = (num: number): number => {
 	return +num.toFixed(2);
+};
+
+export const typeChange = (filename: string, type: string): string => {
+	return filename.replace(/\.[^.]+$/, `.${type}`);
+};
+export const isEmpty = (obj: Record<string, unknown> | File | User | userResponse): boolean => {
+	for (const key in obj) {
+		return false;
+	}
+	return true;
 };

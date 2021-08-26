@@ -3,6 +3,7 @@ import { Box, Container, makeStyles, ThemeProvider } from '@material-ui/core';
 import { Child } from '../types/types';
 import theme from '../UI/topkaTheme';
 import HeaderMobile from '../components/HeaderMobile';
+import { BASE_URL } from '../lib/constants';
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -12,7 +13,8 @@ const useStyles = makeStyles(() => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		background: 'linear-gradient(#ffffff00, #0000005e), no-repeat url(./imgs/topka/bg.webp)',
+		// eslint-disable-next-line quotes
+		background: `linear-gradient(#ffffff00, #0000005e), no-repeat url(${BASE_URL}/imgs/topka/bg.webp)`,
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',
 	},
@@ -32,7 +34,7 @@ const TopkaLayout = ({ children }: Child): ReactElement => {
 		<>
 			<ThemeProvider theme={theme}>
 				<Container disableGutters maxWidth='md' className={classes.root}>
-					<HeaderMobile/>
+					<HeaderMobile />
 					<Box className={classes.wrapper} component='main'>
 						{children}
 					</Box>

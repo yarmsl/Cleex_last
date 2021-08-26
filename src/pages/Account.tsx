@@ -3,6 +3,8 @@ import { Box, Button, makeStyles } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import TopkaLogo from '../components/TopkaLogo';
 import { useStage } from '../lib/context/StageCTX';
+import { logout } from '../lib/context/AuthCTX';
+import { User } from '../types/types';
 
 const useStyles = makeStyles(() => ({
 	top: {
@@ -27,7 +29,7 @@ const useStyles = makeStyles(() => ({
 const Account = (): ReactElement => {
 	const classes = useStyles();
 	const router = useHistory();
-	const { setHeaderMobileTitle } = useStage();
+	const { setHeaderMobileTitle, setUser, removeId } = useStage();
 	
 	useEffect(() => {
 		setHeaderMobileTitle('Личный кабинет');
@@ -42,7 +44,7 @@ const Account = (): ReactElement => {
 				<Button variant='contained' size='large' onClick={() => router.push('/topka/account/tables')}>Выбрать столик на сегодня</Button>
 				<Button variant='contained' size='large' onClick={() => router.push('/topka/account/settings')}>Настройка профиля</Button>
 				<Button variant='contained' size='large' onClick={() => router.push('/topka/account/payback')}>Вывод средств</Button>
-				<Button variant='contained' size='large'>Выход</Button>
+				<Button variant='contained' size='large' onClick={() => { setUser({} as User); logout(); removeId();}} >Выход</Button>
 			</Box>
 		</>
 	);

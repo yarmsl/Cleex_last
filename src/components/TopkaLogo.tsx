@@ -1,5 +1,6 @@
-import { makeStyles } from '@material-ui/core';
 import React, { ReactElement } from 'react';
+import { makeStyles } from '@material-ui/core';
+import { BASE_URL } from '../lib/constants';
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -16,7 +17,7 @@ const TopkaLogo = ():ReactElement => {
 
 	return (
 		<>
-			<img className={classes.root} src='./imgs/topka/topka_logo.webp'/>
+			<img className={classes.root} src={`${BASE_URL}/imgs/topka/topka_logo.webp`}/>
 		</>
 	);
 };

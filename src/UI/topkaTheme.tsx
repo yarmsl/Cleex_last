@@ -74,7 +74,7 @@ const theme = createTheme({
 			contrastText: '#000'
 		},
 		error: {
-			main: '#fff'
+			main: '#F47979'
 		},
 		text: {
 			primary: '#ffffff',

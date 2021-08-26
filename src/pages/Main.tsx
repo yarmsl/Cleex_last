@@ -3,6 +3,7 @@ import { Box, Button, makeStyles } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import TopkaLogo from '../components/TopkaLogo';
 import { useStage } from '../lib/context/StageCTX';
+import { sendPushToWaiter } from '../lib/sendPush';
 
 const useStyles = makeStyles(() => ({
 	top: {
@@ -27,10 +28,11 @@ const useStyles = makeStyles(() => ({
 const Main = (): ReactElement => {
 	const classes = useStyles();
 	const router = useHistory();
-	const { setHeaderMobileTitle } = useStage();
-	
+	const { setHeaderMobileTitle, getWaierIfNeed } = useStage();
+
 	useEffect(() => {
 		setHeaderMobileTitle('Topka Reborn');
+		getWaierIfNeed(router.location.search);
 	}, []);
 
 	return (
@@ -40,8 +42,10 @@ const Main = (): ReactElement => {
 			</Box>
 			<Box className={classes.bottom}>
 				<Button variant='contained' size='large' onClick={() => router.push('/topka/menu')}>Меню</Button>
-				<Button variant='contained' size='large' onClick={() => router.push('/topka/leavetips')}>Оставить чаевые</Button>
-				<Button variant='contained' size='large'>Вызвать официанта</Button>
+				{router.location.search !== '' && <>
+					<Button variant='contained' size='large' onClick={() => router.push(`/topka/leavetips${router.location.search}`)}>Оставить чаевые</Button>
+					<Button variant='contained' size='large' onClick={() => sendPushToWaiter(router.location.search)}>Вызвать официанта</Button>
+				</>}
 			</Box>
 		</>
 	);
